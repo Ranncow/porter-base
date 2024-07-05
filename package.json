@@ -1,0 +1,23 @@
+{
+  "name": "@ranncow/porter-base",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Porter: the base plugin for all apps of the project.",
+  "homepage": "https://github.com/ranncow/porter-base/",
+  "bugs": {
+    "url": "https://github.com/ranncow/porter-base/issues",
+    "email": "alex@flancer32.com"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Alex Gusev",
+    "email": "alex@flancer64.com",
+    "url": "https://github.com/flancer64"
+  },
+  "repository": "github:ranncow/porter-base",
+  "dependencies": {
+    "@teqfw/core": "latest",
+    "@teqfw/db": "latest",
+    "@teqfw/di": "latest"
+  }
+}

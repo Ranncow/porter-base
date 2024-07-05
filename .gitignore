@@ -1,0 +1,6 @@
+/**/node_modules/
+/**/own_modules/
+/**/package-lock.json
+/**/tmp/
+/.idea/
+/.vscode/
