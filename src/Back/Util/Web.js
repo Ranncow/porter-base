@@ -29,10 +29,11 @@ export default class Porter_Base_Back_Util_Web {
         this.postRequest = async function (url, data, headers = {}) {
             return new Promise((resolve, reject) => {
                 const urlObj = new URL(url);
+                const isHttps = urlObj.protocol === 'https:';
 
                 const options = {
                     hostname: urlObj.hostname,
-                    port: urlObj.port || 80,
+                    port: urlObj.port || (isHttps) ? 443 : 80,
                     path: urlObj.pathname + urlObj.search,
                     method: 'POST',
                     headers: {
@@ -42,7 +43,8 @@ export default class Porter_Base_Back_Util_Web {
                     }
                 };
 
-                const request = (urlObj.protocol === 'https:') ? https.request : http.request;
+
+                const request = (isHttps) ? https.request : http.request;
 
                 /** @type {module:http.ClientRequest} */
                 const req = request(options, (res) => {
