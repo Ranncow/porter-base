@@ -4,5 +4,13 @@
       "ns": "Porter_Base",
       "path": "./src"
     }
+  },
+  "@teqfw/web": {
+    "handlers": {
+      "Porter_Base_Back_Web_Handler_ServerEvents": {
+        "before": ["TeqFw_Web_Back_App_Server_Handler_Static"],
+        "spaces": ["porter-sse"]
+      }
+    }
   }
 }
