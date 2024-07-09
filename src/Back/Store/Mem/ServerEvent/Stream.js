@@ -26,9 +26,7 @@ export default class Porter_Base_Back_Store_Mem_ServerEvent_Stream {
                 this.delete(model);
             });
             _store.push(model);
-            model.write({name: 'init'});
-            setInterval(() => model.write({name: 'tik'}), 1500);
-            logger.info(`One SSE stream is added to the storage.`);
+            logger.info(`One SSE stream is added to the in-memory storage.`);
         };
 
         /**

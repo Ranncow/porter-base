@@ -1,33 +1,31 @@
 /**
- * The structure for a shared data about an order.
+ * The structure of the SSE message.
  */
 // MODULE'S VARS
-const NS = 'Porter_Base_Shared_Dto_Order';
+const NS = 'Porter_Base_Shared_Dto_App_ServerEvent_Message';
 
 // MODULE'S CLASSES
 /**
- * @memberOf Porter_Base_Shared_Dto_Order
+ * @memberOf Porter_Base_Shared_Dto_App_ServerEvent_Message
  */
 class Dto {
     static namespace = NS;
-    /** @type {Date} */
-    dateCreated;
     /**
-     * The uncategorized type of the order.
+     * The message payload.
+     * @type {Object}
+     */
+    payload;
+    /**
+     * The uncategorized type of the message.
      * @type {string}
      */
     type;
-    /**
-     * The UUID of the order.
-     * @type {string}
-     */
-    uuid;
 }
 
 /**
  * @implements TeqFw_Core_Shared_Api_Factory_Dto
  */
-export default class Porter_Base_Shared_Dto_Order {
+export default class Porter_Base_Shared_Dto_App_ServerEvent_Message {
     /**
      * @param {TeqFw_Core_Shared_Util_Cast} cast
      */
@@ -38,16 +36,15 @@ export default class Porter_Base_Shared_Dto_Order {
     ) {
         // INSTANCE METHODS
         /**
-         * @param {Porter_Base_Shared_Dto_Order.Dto} [data]
-         * @return {Porter_Base_Shared_Dto_Order.Dto}
+         * @param {Porter_Base_Shared_Dto_App_ServerEvent_Message.Dto} [data]
+         * @return {Porter_Base_Shared_Dto_App_ServerEvent_Message.Dto}
          */
         this.createDto = function (data) {
             // create new DTO and populate it with initialization data
             const res = Object.assign(new Dto(), data);
             // cast known attributes
-            res.dateCreated = cast.date(data?.dateCreated);
+            res.payload = cast.object(data?.payload);
             res.type = cast.string(data?.type);
-            res.uuid = cast.string(data?.uuid);
             return res;
         };
 

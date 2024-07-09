@@ -30,15 +30,7 @@ export default class Porter_Base_Back_Web_Api_App_Refresh {
          * @returns {Promise<void>}
          */
         this.process = async function (req, res, context) {
-            const rs = endpoint.createRes();
-            try {
-                const dto = req.entity;
-                rs.entity = dto;
-                rs.success = true;
-                Object.assign(res, rs);
-            } catch (error) {
-                logger.exception(error);
-            }
+            throw new Error('Please, create an app dependent implementation.');
         };
     }
 

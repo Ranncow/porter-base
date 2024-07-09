@@ -17,6 +17,10 @@ class Model {
      */
     #httpRes;
     /**
+     * @type {function(Porter_Base_Shared_Dto_App_ServerEvent_Message.Dto=): Porter_Base_Shared_Dto_App_ServerEvent_Message.Dto}
+     */
+    #messageFactory;
+    /**
      * The counter for the messages been sent to the front.
      * @type {number}
      */
@@ -24,9 +28,11 @@ class Model {
 
     /**
      * @param {module:http.ServerResponse|module:http2.Http2ServerResponse} httpRes
+     * @param {function(Porter_Base_Shared_Dto_App_ServerEvent_Message.Dto=): Porter_Base_Shared_Dto_App_ServerEvent_Message.Dto} messageFactory
      */
-    constructor(httpRes) {
+    constructor(httpRes, messageFactory) {
         this.#httpRes = httpRes;
+        this.#messageFactory = messageFactory;
     }
 
     /**
@@ -38,15 +44,19 @@ class Model {
 
     /**
      * Serialize given `payload` as JSON text and send it to the front.
-     * @param payload
+     * @param {Object} payload
+     * @param {string} type
      * @return {boolean}
      */
-    write(payload) {
+    write(payload, type) {
         const stream = this.#httpRes;
         if (stream.writable) {
-            const json = JSON.stringify(payload);
+            const msg = this.#messageFactory();
+            msg.type = type;
+            msg.payload = payload;
+            const text = JSON.stringify(msg);
             stream.write(`id: ${this.#messageId++}\n`);
-            stream.write(`data: ${json}\n\n`);
+            stream.write(`data: ${text}\n\n`);
             return true;
         } else {
             return false;
@@ -58,14 +68,21 @@ class Model {
  * The factory to create transient objects.
  */
 export default class Porter_Base_Back_Trans_App_ServerEvent_Stream {
-    constructor() {
+    /**
+     * @param {Porter_Base_Shared_Dto_App_ServerEvent_Message} dtoMessage
+     */
+    constructor(
+        {
+            Porter_Base_Shared_Dto_App_ServerEvent_Message$: dtoMessage,
+        }
+    ) {
         // INSTANCE METHODS
         /**
          * @param {module:http.ServerResponse|module:http2.Http2ServerResponse} httpRes
          * @return {Porter_Base_Back_Trans_App_ServerEvent_Stream.Model}
          */
         this.create = function ({httpRes}) {
-            return new Model(httpRes);
+            return new Model(httpRes, dtoMessage.createDto);
         };
     }
 }
