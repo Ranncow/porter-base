@@ -1,0 +1,114 @@
+{
+  "entity": {
+    "room": {
+      "comment": "The registry for hotel rooms.",
+      "attr": {
+        "id": {"type": "id"},
+        "number": {"type": "integer", "comment": "The room number."},
+        "state": {
+          "type": "enum", "comment": "The current state of the room.",
+          "options": {
+            "values": [
+              "READY",
+              "OCCUPIED"
+            ]
+          }
+        }
+      },
+      "index": {
+        "number": {"type": "unique", "attrs": ["number"]}
+      },
+      "relation": {}
+    }
+  },
+  "package": {
+    "auth": {
+      "entity": {
+        "profile": {
+          "comment": "The registry for user profiles (the data stored in browsers).",
+          "attr": {
+            "id": {"type": "id"},
+            "uuid": {"type": "string", "comment": "Universally Unique Identifier."}
+          },
+          "index": {
+            "uuid": {"type": "unique", "attrs": ["uuid"]}
+          }
+        }
+      }
+    },
+    "room": {
+      "entity": {
+        "permit": {
+          "comment": "The permit for a visitor to register a visit.",
+          "attr": {
+            "id": {"type": "id"},
+            "room_ref": {"type": "ref", "comment": "The related room."},
+            "uuid": {"type": "string", "comment": "Universally Unique Identifier."},
+            "pin": {"type": "integer", "comment": "The random set of a digits for manual registration."},
+            "name": {"type": "string", "comment": "The name of the visitor."},
+            "email": {
+              "type": "string", "nullable": true,
+              "comment": "The email of the visitor to get a link to register a visit."
+            },
+            "date_in": {
+              "comment": "Date-time when the visitor should check into the room.",
+              "type": "datetime"
+            },
+            "date_out": {
+              "comment": "Date-time when the visitor should check out the room.",
+              "type": "datetime"
+            },
+            "date_created": {
+              "comment": "Date-time when record was created.",
+              "type": "datetime",
+              "default": "current"
+            }
+          },
+          "index": {
+            "uuid": {"type": "unique", "attrs": ["uuid"]},
+            "pin": {"type": "unique", "attrs": ["pin"]}
+          },
+          "relation": {
+            "room": {
+              "attrs": ["room_ref"],
+              "ref": {"path": "/room", "attrs": ["id"]},
+              "action": {"delete": "cascade", "update": "cascade"}
+            }
+          }
+        },
+        "visit": {
+          "comment": "The registered visit.",
+          "attr": {
+            "id": {"type": "id"},
+            "room_ref": {"type": "ref", "comment": "The related room."},
+            "profile_ref": {"type": "ref", "comment": "The related user profile."},
+            "name": {"type": "string", "comment": "The name of the visitor."},
+            "email": {
+              "type": "string", "nullable": true,
+              "comment": "The email of the visitor to get a messages related to his activity."
+            },
+            "date_created": {
+              "comment": "Date-time when record was created.",
+              "type": "datetime",
+              "default": "current"
+            }
+          },
+          "index": {},
+          "relation": {
+            "profile": {
+              "attrs": ["profile_ref"],
+              "ref": {"path": "/auth/profile", "attrs": ["id"]},
+              "action": {"delete": "cascade", "update": "cascade"}
+            },
+            "room": {
+              "attrs": ["room_ref"],
+              "ref": {"path": "/room", "attrs": ["id"]},
+              "action": {"delete": "cascade", "update": "cascade"}
+            }
+          }
+        }
+      }
+    }
+  },
+  "refs": {}
+}
