@@ -33,12 +33,13 @@ class Dto {
     id;
     /**
      * The room number.
-     * @type {string}
+     * @type {number}
      */
     number;
     /**
      * The current state of the room.
      * @type {string}
+     * @see Porter_Base_Shared_Enum_Room_State
      */
     state;
 }
