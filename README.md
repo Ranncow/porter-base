@@ -64,6 +64,15 @@ Expected output:
 07/10 12:28:45.553 (info TeqFw_Core_Back_App): The teq-app '@ranncow/porter-desk:0.1.0' has been stopped.
 ```
 
+### Init demo/dev data
+
+Run the command in the desk app:
+
+```shell
+$ npm run data-init
+
+```
+
 ## Links
 
 * https://cust.pilot.porter.wiredgeese.com/
