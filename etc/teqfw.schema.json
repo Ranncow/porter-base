@@ -81,7 +81,7 @@
           "attr": {
             "id": {"type": "id"},
             "room_ref": {"type": "ref", "comment": "The related room."},
-            "profile_ref": {"type": "ref", "comment": "The related user profile."},
+            "front_ref": {"type": "ref", "comment": "The related user front."},
             "name": {"type": "string", "comment": "The name of the visitor."},
             "email": {
               "type": "string", "nullable": true,
@@ -95,9 +95,9 @@
           },
           "index": {},
           "relation": {
-            "profile": {
-              "attrs": ["profile_ref"],
-              "ref": {"path": "/auth/profile", "attrs": ["id"]},
+            "front": {
+              "attrs": ["front_ref"],
+              "ref": {"path": "/auth/front", "attrs": ["id"]},
               "action": {"delete": "cascade", "update": "cascade"}
             },
             "room": {

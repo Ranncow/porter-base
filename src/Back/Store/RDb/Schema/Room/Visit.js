@@ -41,6 +41,11 @@ class Dto {
      */
     email;
     /**
+     * The related user profile.
+     * @type {string}
+     */
+    front_ref;
+    /**
      * @type {number}
      */
     id;
@@ -49,11 +54,6 @@ class Dto {
      * @type {string}
      */
     name;
-    /**
-     * The related user profile.
-     * @type {string}
-     */
-    profile_ref;
     /**
      * The related room.
      * @type {number}
@@ -87,9 +87,9 @@ export default class Porter_Base_Back_Store_RDb_Schema_Room_Visit {
             const res = new Dto();
             res.date_created = cast.date(data?.date_created);
             res.email = cast.string(data?.email);
+            res.front_ref = cast.int(data?.front_ref);
             res.id = cast.int(data?.id);
             res.name = cast.string(data?.name);
-            res.profile_ref = cast.int(data?.profile_ref);
             res.room_ref = cast.int(data?.room_ref);
             return res;
         };

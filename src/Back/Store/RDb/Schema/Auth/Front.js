@@ -1,5 +1,5 @@
 /**
- *  Metadata for RDB entity: the registry for user profiles (the data stored in browsers).
+ *  Metadata for RDB entity: the registry for user fronts (the data stored in the browser profiles).
  *  @namespace Porter_Base_Back_Store_RDb_Schema_Auth_Front
  */
 // MODULE'S VARS
