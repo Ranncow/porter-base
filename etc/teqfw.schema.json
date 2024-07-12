@@ -33,10 +33,41 @@
               "comment": "Date-time when record was created.",
               "type": "datetime",
               "default": "current"
+            },
+            "date_last": {
+              "comment": "The last date-time when the front was authenticated.",
+              "type": "datetime",
+              "default": "current"
             }
           },
           "index": {
             "uuid": {"type": "unique", "attrs": ["uuid"]}
+          }
+        },
+        "session": {
+          "comment": "The registry for sessions (authenticated fronts).",
+          "attr": {
+            "id": {"type": "id"},
+            "front_ref": {"type": "ref", "comment": "The related user front."},
+            "cookie_id": {"type": "string", "comment": "The session identifier stored in the cookie on the front."},
+            "api_key": {"type": "string", "comment": "The session identifier stored in the local storage on the front."},
+            "date_created": {
+              "comment": "Date-time when record was created.",
+              "type": "datetime",
+              "default": "current"
+            }
+          },
+          "index": {
+            "front": {"type": "unique", "attrs": ["front_ref"]},
+            "apiKey": {"type": "unique", "attrs": ["api_key"]},
+            "cookieId": {"type": "unique", "attrs": ["cookie_id"]}
+          },
+          "relation": {
+            "front": {
+              "attrs": ["front_ref"],
+              "ref": {"path": "/auth/front", "attrs": ["id"]},
+              "action": {"delete": "cascade", "update": "cascade"}
+            }
           }
         }
       }

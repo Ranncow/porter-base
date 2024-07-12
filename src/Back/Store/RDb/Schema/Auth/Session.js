@@ -1,59 +1,65 @@
 /**
- *  Metadata for RDB entity: the registry for user fronts (the data stored in the browser profiles).
- *  @namespace Porter_Base_Back_Store_RDb_Schema_Auth_Front
+ *  Metadata for RDB entity: the registry for sessions (authenticated fronts).
+ *  @namespace Porter_Base_Back_Store_RDb_Schema_Auth_Session
  */
 // MODULE'S VARS
-const NS = 'Porter_Base_Back_Store_RDb_Schema_Auth_Front';
+const NS = 'Porter_Base_Back_Store_RDb_Schema_Auth_Session';
 /**
  * Path to the entity in plugin's DEM.
  * @type {string}
  */
-const ENTITY = '/auth/front';
+const ENTITY = '/auth/session';
 
 /**
- * @memberOf Porter_Base_Back_Store_RDb_Schema_Auth_Front
+ * @memberOf Porter_Base_Back_Store_RDb_Schema_Auth_Session
  * @type {Object}
  */
 const ATTR = {
+    API_KEY: 'api_key',
+    COOKIE_ID: 'cookie_id',
     DATE_CREATED: 'date_created',
-    DATE_LAST: 'date_last',
+    FRONT_REF: 'front_ref',
     ID: 'id',
-    UUID: 'uuid',
 };
 Object.freeze(ATTR);
 
 // MODULE'S CLASSES
 /**
- * @memberOf Porter_Base_Back_Store_RDb_Schema_Auth_Front
+ * @memberOf Porter_Base_Back_Store_RDb_Schema_Auth_Session
  */
 class Dto {
     static namespace = NS;
+    /**
+     * The session identifier stored in the local storage on the front.
+     * @type {string}
+     */
+    api_key;
+    /**
+     * The session identifier stored in the cookie on the front.
+     * @type {string}
+     */
+    cookie_id;
     /**
      * Date-time when record was created.
      * @type {Date}
      */
     date_created;
     /**
-     * The last date-time when the front was authenticated.
-     * @type {Date}
+     * The related user front.
+     * @type {number}
      */
-    date_last;
+    front_ref;
     /**
      * @type {number}
      */
     id;
-    /**
-     * Universally Unique Identifier.
-     * @type {string}
-     */
-    uuid;
 }
 
 // noinspection JSClosureCompilerSyntax
 /**
  * @implements TeqFw_Db_Back_RDb_Meta_IEntity
  */
-export default class Porter_Base_Back_Store_RDb_Schema_Auth_Front {
+export default class Porter_Base_Back_Store_RDb_Schema_Auth_Session {
     /**
      * @param {Porter_Base_Back_Defaults} DEF
      * @param {TeqFw_Db_Back_RDb_Schema_EntityBase} base
@@ -68,21 +74,22 @@ export default class Porter_Base_Back_Store_RDb_Schema_Auth_Front {
     ) {
         // INSTANCE METHODS
         /**
-         * @param {Porter_Base_Back_Store_RDb_Schema_Auth_Front.Dto} [data]
-         * @return {Porter_Base_Back_Store_RDb_Schema_Auth_Front.Dto}
+         * @param {Porter_Base_Back_Store_RDb_Schema_Auth_Session.Dto} [data]
+         * @return {Porter_Base_Back_Store_RDb_Schema_Auth_Session.Dto}
          */
         this.createDto = function (data) {
             const res = new Dto();
+            res.api_key = cast.string(data?.api_key);
+            res.cookie_id = cast.string(data?.cookie_id);
             res.date_created = cast.date(data?.date_created);
-            res.date_last = cast.date(data?.date_last);
+            res.front_ref = cast.int(data?.front_ref);
             res.id = cast.int(data?.id);
-            res.uuid = cast.string(data?.uuid);
             return res;
         };
 
         /**
          * Set JSDoc return type, real code is in `TeqFw_Db_Back_RDb_Schema_EntityBase`.
-         * @return {typeof Porter_Base_Back_Store_RDb_Schema_Auth_Front.ATTR}
+         * @return {typeof Porter_Base_Back_Store_RDb_Schema_Auth_Session.ATTR}
          */
         this.getAttributes = function () {};
 
