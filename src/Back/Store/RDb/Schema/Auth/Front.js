@@ -1,17 +1,17 @@
 /**
  *  Metadata for RDB entity: the registry for user profiles (the data stored in browsers).
- *  @namespace Porter_Base_Back_Store_RDb_Schema_Auth_Profile
+ *  @namespace Porter_Base_Back_Store_RDb_Schema_Auth_Front
  */
 // MODULE'S VARS
-const NS = 'Porter_Base_Back_Store_RDb_Schema_Auth_Profile';
+const NS = 'Porter_Base_Back_Store_RDb_Schema_Auth_Front';
 /**
  * Path to the entity in plugin's DEM.
  * @type {string}
  */
-const ENTITY = '/auth/profile';
+const ENTITY = '/auth/front';
 
 /**
- * @memberOf Porter_Base_Back_Store_RDb_Schema_Auth_Profile
+ * @memberOf Porter_Base_Back_Store_RDb_Schema_Auth_Front
  * @type {Object}
  */
 const ATTR = {
@@ -22,7 +22,7 @@ Object.freeze(ATTR);
 
 // MODULE'S CLASSES
 /**
- * @memberOf Porter_Base_Back_Store_RDb_Schema_Auth_Profile
+ * @memberOf Porter_Base_Back_Store_RDb_Schema_Auth_Front
  */
 class Dto {
     static namespace = NS;
@@ -41,7 +41,7 @@ class Dto {
 /**
  * @implements TeqFw_Db_Back_RDb_Meta_IEntity
  */
-export default class Porter_Base_Back_Store_RDb_Schema_Auth_Profile {
+export default class Porter_Base_Back_Store_RDb_Schema_Auth_Front {
     /**
      * @param {Porter_Base_Back_Defaults} DEF
      * @param {TeqFw_Db_Back_RDb_Schema_EntityBase} base
@@ -56,8 +56,8 @@ export default class Porter_Base_Back_Store_RDb_Schema_Auth_Profile {
     ) {
         // INSTANCE METHODS
         /**
-         * @param {Porter_Base_Back_Store_RDb_Schema_Auth_Profile.Dto} [data]
-         * @return {Porter_Base_Back_Store_RDb_Schema_Auth_Profile.Dto}
+         * @param {Porter_Base_Back_Store_RDb_Schema_Auth_Front.Dto} [data]
+         * @return {Porter_Base_Back_Store_RDb_Schema_Auth_Front.Dto}
          */
         this.createDto = function (data) {
             const res = new Dto();
@@ -68,7 +68,7 @@ export default class Porter_Base_Back_Store_RDb_Schema_Auth_Profile {
 
         /**
          * Set JSDoc return type, real code is in `TeqFw_Db_Back_RDb_Schema_EntityBase`.
-         * @return {typeof Porter_Base_Back_Store_RDb_Schema_Auth_Profile.ATTR}
+         * @return {typeof Porter_Base_Back_Store_RDb_Schema_Auth_Front.ATTR}
          */
         this.getAttributes = function () {};
 

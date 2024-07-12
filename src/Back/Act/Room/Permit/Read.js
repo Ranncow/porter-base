@@ -33,14 +33,17 @@ export default class Porter_Base_Back_Act_Room_Permit_Read {
          * @param {TeqFw_Db_Back_RDb_ITrans} trx
          * @param {number} [id]
          * @param {string} [uuid]
+         * @param {number} [pin]
          * @return {Promise<ActResult>}
          */
-        this.act = async function ({trx, id, uuid}) {
+        this.act = async function ({trx, id, uuid, pin}) {
             /** @type {Porter_Base_Back_Store_RDb_Schema_Room_Permit.Dto} */
             let dbPermit;
             /** @type {Porter_Base_Back_Store_RDb_Schema_Room.Dto} */
             let dbRoom;
-            const key = id ?? {[A_PERMIT.UUID]: uuid};
+            const key = (id) ? id
+                : (uuid) ? {[A_PERMIT.UUID]: uuid}
+                    : {[A_PERMIT.PIN]: pin};
             /** @type {Porter_Base_Back_Store_RDb_Schema_Room_Permit.Dto} */
             dbPermit = await crud.readOne(trx, rdbPermit, key);
             if (dbPermit)

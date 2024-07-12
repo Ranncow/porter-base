@@ -24,8 +24,8 @@
   "package": {
     "auth": {
       "entity": {
-        "profile": {
-          "comment": "The registry for user profiles (the data stored in browsers).",
+        "front": {
+          "comment": "The registry for fronts (the data stored in the browser profiles).",
           "attr": {
             "id": {"type": "id"},
             "uuid": {"type": "string", "comment": "Universally Unique Identifier."}
