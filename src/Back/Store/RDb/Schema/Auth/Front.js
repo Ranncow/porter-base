@@ -15,6 +15,7 @@ const ENTITY = '/auth/front';
  * @type {Object}
  */
 const ATTR = {
+    DATE_CREATED: 'date_created',
     ID: 'id',
     UUID: 'uuid',
 };
@@ -26,6 +27,11 @@ Object.freeze(ATTR);
  */
 class Dto {
     static namespace = NS;
+    /**
+     * Date-time when record was created.
+     * @type {Date}
+     */
+    date_created;
     /**
      * @type {number}
      */
@@ -61,6 +67,7 @@ export default class Porter_Base_Back_Store_RDb_Schema_Auth_Front {
          */
         this.createDto = function (data) {
             const res = new Dto();
+            res.date_created = cast.date(data?.date_created);
             res.id = cast.int(data?.id);
             res.uuid = cast.string(data?.uuid);
             return res;

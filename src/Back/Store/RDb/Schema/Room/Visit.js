@@ -16,10 +16,12 @@ const ENTITY = '/room/visit';
  */
 const ATTR = {
     DATE_CREATED: 'date_created',
+    DATE_IN: 'date_in',
+    DATE_OUT: 'date_out',
     EMAIL: 'email',
+    FRONT_REF: 'front_ref',
     ID: 'id',
     NAME: 'name',
-    PROFILE_REF: 'profile_ref',
     ROOM_REF: 'room_ref',
 };
 Object.freeze(ATTR);
@@ -36,13 +38,23 @@ class Dto {
      */
     date_created;
     /**
+     * Date-time when the visitor should check into the room.
+     * @type {Date}
+     */
+    date_in;
+    /**
+     * Date-time when the visitor should check out the room.
+     * @type {Date}
+     */
+    date_out;
+    /**
      * The email of the visitor to get a messages related to his activity.
      * @type {string}
      */
     email;
     /**
-     * The related user profile.
-     * @type {string}
+     * The related user front.
+     * @type {number}
      */
     front_ref;
     /**
@@ -86,6 +98,8 @@ export default class Porter_Base_Back_Store_RDb_Schema_Room_Visit {
         this.createDto = function (data) {
             const res = new Dto();
             res.date_created = cast.date(data?.date_created);
+            res.date_in = cast.date(data?.date_in);
+            res.date_out = cast.date(data?.date_out);
             res.email = cast.string(data?.email);
             res.front_ref = cast.int(data?.front_ref);
             res.id = cast.int(data?.id);

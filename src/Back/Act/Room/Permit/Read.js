@@ -1,5 +1,5 @@
 /**
- * Read the sign-in permit data from RDB.
+ * Read the check-in permit data from RDB.
  *
  * @implements TeqFw_Core_Shared_Api_Act
  */
