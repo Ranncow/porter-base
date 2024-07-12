@@ -96,6 +96,14 @@
               "comment": "Date-time when record was created.",
               "type": "datetime",
               "default": "current"
+            },
+            "date_in": {
+              "comment": "Date-time when the visitor should check into the room.",
+              "type": "datetime"
+            },
+            "date_out": {
+              "comment": "Date-time when the visitor should check out the room.",
+              "type": "datetime"
             }
           },
           "index": {},
