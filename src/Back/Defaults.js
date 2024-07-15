@@ -3,6 +3,11 @@
  */
 export default class Porter_Base_Back_Defaults {
 
+    COOKIE_SESSION_NAME = 'PORTER_SESSION';
+    COOKIE_SESSION_LIFETIME = 31536000000;  // 365 * 24 * 60 * 60 * 1000
+    REQ_HTTP_SESSION_DATA;
+    REQ_HTTP_SESSION_ID;
+
     /** @type {TeqFw_Web_Back_Defaults} */
     MOD_WEB;
     /** @type {TeqFw_Web_Api_Back_Defaults} */
@@ -26,6 +31,8 @@ export default class Porter_Base_Back_Defaults {
         this.MOD_WEB = MOD_WEB;
         this.MOD_WEB_API = MOD_WEB_API;
         this.SHARED = SHARED;
+        this.REQ_HTTP_SESSION_DATA = SHARED.NAME + '/sessionData';
+        this.REQ_HTTP_SESSION_ID = SHARED.NAME + '/sessionId';
         Object.freeze(this);
     }
 }

@@ -16,7 +16,7 @@ const {
 /**
  * @implements TeqFw_Web_Back_Api_Dispatcher_IHandler
  */
-export default class Porter_Base_Back_Web_Handler_Stream_Open {
+export default class Porter_Base_Back_Web_Handler_ServerEvents {
     /**
      * @param {Porter_Base_Back_Defaults} DEF
      * @param {TeqFw_Core_Shared_Api_Logger} logger -  instance
@@ -38,7 +38,7 @@ export default class Porter_Base_Back_Web_Handler_Stream_Open {
          * Process HTTP request if not processed before.
          * @param {module:http.IncomingMessage|module:http2.Http2ServerRequest}req
          * @param {module:http.ServerResponse|module:http2.Http2ServerResponse} res
-         * @memberOf Porter_Base_Back_Web_Handler_Stream_Open
+         * @memberOf Porter_Base_Back_Web_Handler_ServerEvents
          */
         async function process(req, res) {
             // FUNCS

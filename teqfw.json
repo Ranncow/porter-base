@@ -10,6 +10,9 @@
       "Porter_Base_Back_Web_Handler_ServerEvents": {
         "before": ["TeqFw_Web_Back_App_Server_Handler_Static"],
         "spaces": ["porter-sse"]
+      },
+      "Porter_Base_Back_Web_Handler_Session": {
+        "before": ["TeqFw_Web_Api_Back_Web_Handler_Service"]
       }
     }
   }
